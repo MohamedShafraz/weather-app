@@ -11,7 +11,7 @@ import { useState } from 'react';
 export default function Weather(){
     const [city,setCity] = useState("Colombo")
     const [location,setLocation] = useState({country:"Sri Lanka",name:"Colombo"})
-    const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7",condition:{icon:"//cdn.weatherapi.com/weather/64x64/night/116.png"}})
+    const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7",condition:{icon:"//cdn.weatherapi.com/weather/64x64/night/116.png",text:"Partly cloudy"}})
     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
     const API_URL = import.meta.env.VITE_WEATHER_API_URL;
     const fetchDetails = async () =>{
@@ -60,7 +60,7 @@ export default function Weather(){
                 <div className='weather-main'>
                     <div>
                         <img className="weather-icon" src={weatherDetails.condition.icon} alt="Weather icon"/>
-                        <p id="weather-description"></p>
+                        <p id="weather-description">{weatherDetails.condition.text}</p>
                     </div>
                     <div className='temperature'>{weatherDetails.temp_c}°C</div>
                 </div>
