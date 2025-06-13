@@ -12,10 +12,12 @@ export default function Weather(){
     const [city,setCity] = useState("Colombo")
     const [location,setLocation] = useState({country:"Sri Lanka",name:"Colombo"})
     const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7",condition:{icon:"//cdn.weatherapi.com/weather/64x64/night/116.png",text:"Partly cloudy"}})
+    const [isLoading,setIsLoading] = useState(false)
     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
     const API_URL = import.meta.env.VITE_WEATHER_API_URL;
     const fetchDetails = async () =>{
             try {
+                setIsLoading(true)
                 const response = await fetch(`${API_URL}${encodeURIComponent(city)}&key=${API_KEY}`, {
                     headers: {
                         'X-RapidAPI-Key': API_KEY,
@@ -27,9 +29,11 @@ export default function Weather(){
                     alert('City not found');
                 }
                 const data = await response.json();
+                setIsLoading(false)
                 setWeatherDetails(data.current)
                 setLocation(data.location)
             } catch (error) {
+                setIsLoading(false)
                 console.error(error);
         }
     }
@@ -50,6 +54,13 @@ export default function Weather(){
             />
             <button className='search-button' title="search" onClick={fetchDetails}><FontAwesomeIcon icon={faSearch}/></button>
         </div>
+        {isLoading &&
+         <div className='weather-container'>
+            <div className='card current-weather'>
+                <div className="spinner" />
+            </div>
+        </div>}
+        {!isLoading &&
         <div className='weather-container'>
             <div className='card current-weather'>
                 <div className='location'>
@@ -91,7 +102,7 @@ export default function Weather(){
                     </div>
                 </div>
             </div>
-        </div>
+        </div>}
     </div>
       
     )
