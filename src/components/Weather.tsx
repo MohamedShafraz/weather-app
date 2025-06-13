@@ -9,19 +9,20 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 export default function Weather(){
+    const [city,setCity] = useState("Colombo")
     const [location,setLocation] = useState({country:"Sri Lanka",name:"Colombo"})
-    const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7"})
+    const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7",condition:{icon:"//cdn.weatherapi.com/weather/64x64/night/116.png"}})
     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
     const API_URL = import.meta.env.VITE_WEATHER_API_URL;
     const fetchDetails = async () =>{
             try {
-                const response = await fetch(`${API_URL}${encodeURIComponent(location.name)}&key=${API_KEY}`, {
+                const response = await fetch(`${API_URL}${encodeURIComponent(city)}&key=${API_KEY}`, {
                     headers: {
                         'X-RapidAPI-Key': API_KEY,
                         'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
                     }
                 });
-                
+            
                 if (!response.ok) {
                     alert('City not found');
                 }
@@ -44,9 +45,10 @@ export default function Weather(){
                 className='search-input'
                 type="text" 
                 placeholder="Search for a city (e.g. London, Tokyo)" 
-                value={"Colombo"}
+                 value={city}
+                onChange={(e) => setCity(e.target.value)}
             />
-            <button className='search-button' title="search" onChange={fetchDetails}><FontAwesomeIcon icon={faSearch}/></button>
+            <button className='search-button' title="search" onClick={fetchDetails}><FontAwesomeIcon icon={faSearch}/></button>
         </div>
         <div className='weather-container'>
             <div className='card current-weather'>
@@ -57,7 +59,7 @@ export default function Weather(){
                 
                 <div className='weather-main'>
                     <div>
-                        <img id="weather-icon" className="weather-icon" src="" alt="Weather icon"/>
+                        <img className="weather-icon" src={weatherDetails.condition.icon} alt="Weather icon"/>
                         <p id="weather-description"></p>
                     </div>
                     <div className='temperature'>{weatherDetails.temp_c}°C</div>
