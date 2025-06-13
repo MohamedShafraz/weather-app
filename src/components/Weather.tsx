@@ -13,6 +13,25 @@ export default function Weather(){
     const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7"})
     const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
     const API_URL = import.meta.env.VITE_WEATHER_API_URL;
+    const fetchDetails = async () =>{
+            try {
+                const response = await fetch(`${API_URL}${encodeURIComponent(location.name)}&key=${API_KEY}`, {
+                    headers: {
+                        'X-RapidAPI-Key': API_KEY,
+                        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+                    }
+                });
+                
+                if (!response.ok) {
+                    alert('City not found');
+                }
+                const data = await response.json();
+                setWeatherDetails(data.current)
+                setLocation(data.location)
+            } catch (error) {
+                console.error(error);
+        }
+    }
     return (
       <div className='container'>
         <header>
@@ -27,7 +46,7 @@ export default function Weather(){
                 placeholder="Search for a city (e.g. London, Tokyo)" 
                 value={"Colombo"}
             />
-            <button className='search-button' title="search" onChange={() => "Search button clicked"}><FontAwesomeIcon icon={faSearch}/></button>
+            <button className='search-button' title="search" onChange={fetchDetails}><FontAwesomeIcon icon={faSearch}/></button>
         </div>
         <div className='weather-container'>
             <div className='card current-weather'>
