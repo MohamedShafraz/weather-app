@@ -4,11 +4,11 @@ import Weather from './components/Weather'
 function App() {
 
   return (
-    <>
-      <div>
-       <h1><Weather /></h1>
-      </div>
-    </>
+    <div className='App'>
+      <header className='App-header'>
+       <Weather />
+      </header>
+    </div>
   )
 }
 
