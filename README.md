@@ -1,54 +1,105 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple and responsive weather application built with React that fetches real-time weather data using the WeatherAPI and displays current conditions, including temperature, weather description, and condition icon. The app is containerized using Docker and uses environment variables for secure API access.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Search weather by city name
+- Real-time temperature and condition display
+- Weather description with icon
+- Responsive UI with FontAwesome icons
+- Loading indicator during data fetch
+- Environment-based API key management
+- Dockerfile for easy deployment
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Tech Stack
+
+- **React**
+- **Vite**
+- **FontAwesome**
+- **WeatherAPI**
+- **Docker**
+
+---
+
+## Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/MohamedShafraz/weather-app.git
+cd weather-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Install Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+npm install
 ```
+
+### 3. Configure Environment Variables
+
+Create a `.env` file in the root directory based on the provided `.env.sample`:
+
+```env
+VITE_WEATHER_API_KEY=your_api_key_here
+VITE_WEATHER_API_URL=https://api.weatherapi.com/v1/current.json?q=
+```
+
+### 4. Run the App
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) to view the app in your browser.
+
+---
+
+## Docker
+
+### 1. Build Docker Image
+
+```bash
+docker build -t weather-app .
+```
+
+### 2. Run Container
+
+```bash
+docker run -p 3000:3000 weather-app
+```
+
+---
+
+## Project Structure
+
+```
+├── public/
+├── src/
+│   ├── components/
+│   │   └── Weather.jsx
+│   └── App.jsx
+├── .env.sample
+├── Dockerfile
+├── README.md
+└── vite.config.js
+```
+
+---
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## Acknowledgements
+
+- [WeatherAPI](https://www.weatherapi.com/)
+- [FontAwesome](https://fontawesome.com/)
+- [Vite](https://vitejs.dev/)
