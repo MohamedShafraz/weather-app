@@ -7,9 +7,10 @@ import {
   faWind,
   faCompressAlt
 } from '@fortawesome/free-solid-svg-icons';
-export default function Weather(){ 
-    const location = {country:"Sri Lanka",name:"Colombo"}
-    const WeatherDetails = {temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7"}
+import { useState } from 'react';
+export default function Weather(){
+    const [location,setLocation] = useState({country:"Sri Lanka",name:"Colombo"})
+    const [weatherDetails,setWeatherDetails] = useState({temp_c:"37.5",humidity:"84",uv:"0.4",pressure_mb:"1004",wind_kph:"27.7"})
     return (
       <div className='container'>
         <header>
@@ -38,32 +39,32 @@ export default function Weather(){
                         <img id="weather-icon" className="weather-icon" src="" alt="Weather icon"/>
                         <p id="weather-description"></p>
                     </div>
-                    <div className='temperature'>{WeatherDetails.temp_c}°C</div>
+                    <div className='temperature'>{weatherDetails.temp_c}°C</div>
                 </div>
                 
                 <div className='weather-details'>
                     <div className='detail-card'>
                         <FontAwesomeIcon icon={faTint}/>
                         <h4>Humidity</h4>
-                        <p className='detail-value'>{WeatherDetails.humidity}%</p>
+                        <p className='detail-value'>{weatherDetails.humidity}%</p>
                     </div>
                     
                     <div className='detail-card'>
                         <FontAwesomeIcon icon={faWind}/>
                         <h4>Wind Speed</h4>
-                        <p className='detail-value'>{WeatherDetails.wind_kph}km/h</p>
+                        <p className='detail-value'>{weatherDetails.wind_kph}km/h</p>
                     </div>
                     
                     <div className='detail-card'>
                         <FontAwesomeIcon icon={faSun}/>
                         <h4>UV Index</h4>
-                        <p className='detail-value'>{WeatherDetails.uv}</p>
+                        <p className='detail-value'>{weatherDetails.uv}</p>
                     </div>
                     
                     <div className='detail-card'>
                         <FontAwesomeIcon icon={faCompressAlt}/>
                         <h4>Pressure</h4>
-                        <p className='detail-value'>{WeatherDetails.pressure_mb} mb</p>
+                        <p className='detail-value'>{weatherDetails.pressure_mb} mb</p>
                     </div>
                 </div>
             </div>
