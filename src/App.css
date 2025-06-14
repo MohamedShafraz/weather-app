@@ -182,8 +182,24 @@
         }
         
         .detail-value {
-            font-size: 20px;
+            font-size: 26px;
             font-weight: bold;
+        }
+
+        .detail-card .humidity{
+            color:#0288D1
+        }
+
+        .detail-card .wind-speed{
+            color:#00ACC1
+        }
+
+        .detail-card .uv{
+            color:#FDD835
+        }
+
+        .detail-card .pressure{
+            color:#00ACC1
         }
         
         .loading {
