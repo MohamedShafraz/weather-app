@@ -30,11 +30,13 @@ export default function Weather() {
   const [location, setLocation] = useState<LocationData>({name:"",country:""});
   const [weatherDetails, setWeatherDetails] = useState<WeatherData>({temp_c:"",humidity:"",uv:"",pressure_mb:"",wind_kph:"",condition:{icon:"",text:""}});
   const [isLoading, setIsLoading] = useState(false);
+  const [error,setError] = useState("")
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
   const API_URL = import.meta.env.VITE_WEATHER_API_URL;
   const fetchDetails = async () => {
     try {
       setIsLoading(true);
+      setError("");
       const response = await fetch(
         `${API_URL}${encodeURIComponent(city)}&key=${API_KEY}`,
         {
@@ -46,7 +48,7 @@ export default function Weather() {
       );
 
       if (!response.ok) {
-        alert("City not found");
+       setError("We couldn't find that city. Please check the spelling and try again.");
       }
       const data = await response.json();
       setIsLoading(false);
@@ -54,7 +56,8 @@ export default function Weather() {
       setLocation(data.location);
     } catch (error) {
       setIsLoading(false);
-      console.error(error);
+      const err = error as Error;
+      setError(err.message || "An unexpected error occurred.");
     }
   };
   useEffect(() => {
@@ -88,7 +91,14 @@ export default function Weather() {
           </div>
         </div>
       )}
-      {!isLoading && (
+      {!isLoading && error && (
+        <div className="weather-container">
+          <div className="card current-weather">
+          <p className="error">{error}</p>
+          </div>
+        </div>
+      )}
+      {!isLoading && !error &&(
         <div className="weather-container">
           <div className="card current-weather">
             <div className="location">
