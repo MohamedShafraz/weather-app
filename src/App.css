@@ -96,8 +96,10 @@
         }
         
         .search-button {
-            background: var(--primary);
-            color: white;
+            /* background: var(--primary);
+            color: white; */
+            color: var(--primary);
+            background-color: var(--card);
             border: none;
             padding: 0.7rem 1rem;
             cursor: pointer;
@@ -106,7 +108,8 @@
         }
         
         .search-button:hover {
-            background: var(--secondary);
+            /* background: var(--secondary); */
+            color: var(--secondary);
         }
         
          .search-button:focus-visible {
@@ -115,7 +118,7 @@
         .search-button:focus {
             outline: none;
         }
-        
+
         .card {
             background: var(--card);
             border-radius: 15px;
