@@ -67,7 +67,7 @@ export default function Weather() {
     <div className="container">
       <header>
         <h1>
-          <FontAwesomeIcon icon={faCloudSun} /> Weather Reporter
+          <FontAwesomeIcon icon={faCloudSun}/> Weather Reporter
         </h1>
         <p>Get current weather conditions anywhere</p>
       </header>
@@ -79,8 +79,13 @@ export default function Weather() {
           placeholder="Search for a city (e.g. London, Tokyo)"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      fetchDetails();
+    }
+  }}
         />
-        <button className="search-button" title="search" onClick={fetchDetails}>
+        <button className="search-button" title="search" onClick={fetchDetails} >
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
@@ -122,25 +127,25 @@ export default function Weather() {
 
             <div className="weather-details">
               <div className="detail-card">
-                <FontAwesomeIcon icon={faTint} />
+                <FontAwesomeIcon icon={faTint} className="humidity"/>
                 <h4>Humidity</h4>
                 <p className="detail-value">{weatherDetails.humidity}%</p>
               </div>
 
               <div className="detail-card">
-                <FontAwesomeIcon icon={faWind} />
+                <FontAwesomeIcon icon={faWind} className="wind-speed"/>
                 <h4>Wind Speed</h4>
                 <p className="detail-value">{weatherDetails.wind_kph}km/h</p>
               </div>
 
               <div className="detail-card">
-                <FontAwesomeIcon icon={faSun} />
+                <FontAwesomeIcon icon={faSun} className="uv"/>
                 <h4>UV Index</h4>
                 <p className="detail-value">{weatherDetails.uv}</p>
               </div>
 
               <div className="detail-card">
-                <FontAwesomeIcon icon={faCompressAlt} />
+                <FontAwesomeIcon icon={faCompressAlt} className="pressure"/>
                 <h4>Pressure</h4>
                 <p className="detail-value">{weatherDetails.pressure_mb} mb</p>
               </div>
