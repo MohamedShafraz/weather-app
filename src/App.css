@@ -109,6 +109,12 @@
             background: var(--secondary);
         }
         
+         .search-button:focus-visible {
+            outline: none;
+        }
+        .search-button:focus {
+            outline: none;
+        }
         
         .card {
             background: var(--card);

@@ -79,8 +79,13 @@ export default function Weather() {
           placeholder="Search for a city (e.g. London, Tokyo)"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      fetchDetails();
+    }
+  }}
         />
-        <button className="search-button" title="search" onClick={fetchDetails}>
+        <button className="search-button" title="search" onClick={fetchDetails} >
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
