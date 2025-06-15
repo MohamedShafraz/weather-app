@@ -13,6 +13,7 @@ A simple and responsive weather application built with React that fetches real-t
 - Loading indicator during data fetch
 - Environment-based API key management
 - Dockerfile for easy deployment
+- Comprehensive unit testing with Vitest
 
 ---
 
@@ -23,10 +24,16 @@ A simple and responsive weather application built with React that fetches real-t
 - **FontAwesome**
 - **WeatherAPI**
 - **Docker**
+- **Vitest**
 
 ---
 
 ## Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- Docker (optional)
+- WeatherAPI key ([Sign up here](https://www.weatherapi.com/))
 
 ### 1. Clone the Repository
 
@@ -76,6 +83,27 @@ docker run -p 3000:3000 weather-app
 
 ---
 
+## Running Tests
+### 1.Unit Tests
+
+```bash
+npm test
+```
+
+### 2.Test Coverage
+
+```bash
+npm test -- --coverage
+```
+
+### 3.Watch Mode (Development)
+
+```bash
+npm test -- --watch
+```
+
+---
+
 ## Project Structure
 
 ```
@@ -85,9 +113,20 @@ docker run -p 3000:3000 weather-app
 │   │   └── Weather.jsx
 │   └── App.jsx
 ├── .env.sample
-├── Dockerfile
+├── .gitignore
+├── dockerfile
+├── eslint.config.js
+├── index.html
+├── LICENSE
+├── License.md
+├── package-lock.json
+├── package.json
 ├── README.md
-└── vite.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vite.config.js
+└── vitest.setup.js
 ```
 
 ---
@@ -98,8 +137,26 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
+## Testing Details
+### The application includes comprehensive unit tests for:
+
+- Component rendering
+
+- API integration and data fetching
+
+- User interactions (search, enter key)
+
+- Loading states
+
+- Error handling
+
+- Environment variable usage
+
 ## Acknowledgements
 
 - [WeatherAPI](https://www.weatherapi.com/)
 - [FontAwesome](https://fontawesome.com/)
 - [Vite](https://vitejs.dev/)
+- [Vitest](https://vitest.dev/)
+
+
