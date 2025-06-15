@@ -10,7 +10,7 @@ import {
 import { useEffect, useState } from "react";
 export default function Weather() {
   interface WeatherCondition {
-    icon: string;
+    icon: string|undefined;
     text: string;
   }
 
@@ -28,7 +28,7 @@ export default function Weather() {
   }
   const [city, setCity] = useState("Colombo");
   const [location, setLocation] = useState<LocationData>({name:"",country:""});
-  const [weatherDetails, setWeatherDetails] = useState<WeatherData>({temp_c:"",humidity:"",uv:"",pressure_mb:"",wind_kph:"",condition:{icon:"",text:""}});
+  const [weatherDetails, setWeatherDetails] = useState<WeatherData>({temp_c:"",humidity:"",uv:"",pressure_mb:"",wind_kph:"",condition:{icon:undefined,text:""}});
   const [isLoading, setIsLoading] = useState(false);
   const [error,setError] = useState("")
   const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
