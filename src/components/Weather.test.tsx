@@ -2,18 +2,15 @@ import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Weather from './Weather';
 import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import { vi, type Mock } from 'vitest';
 
-// Mock environment variables
 vi.stubEnv('VITE_WEATHER_API_KEY', 'test_api_key');
 vi.stubEnv('VITE_WEATHER_API_URL', 'https://api.test/');
 
-// Mock FontAwesome icons
 vi.mock('@fortawesome/react-fontawesome', () => ({
   FontAwesomeIcon: ({ icon }: { icon: any }) => <span>{icon.iconName}</span>
 }));
 
-// Mock API responses
 const mockSuccessResponse = {
   location: { name: 'London', country: 'UK' },
   current: {
@@ -51,7 +48,7 @@ describe('Weather Component', () => {
   });
 
   test('fetches weather data on mount', async () => {
-    (fetch as vi.Mock).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockSuccessResponse
     });
@@ -72,7 +69,7 @@ describe('Weather Component', () => {
   });
 
   test('handles search functionality', async () => {
-    (fetch as vi.Mock).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockSuccessResponse
     });
@@ -96,7 +93,7 @@ describe('Weather Component', () => {
   });
 
   test('handles Enter key press', async () => {
-    (fetch as vi.Mock).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockSuccessResponse
     });
@@ -118,7 +115,7 @@ describe('Weather Component', () => {
   });
 
   test('displays loading state', async () => {
-    (fetch as vi.Mock).mockImplementationOnce(
+    (fetch as Mock).mockImplementationOnce(
       () => new Promise(resolve => setTimeout(() => resolve({ ok: true, json: () => ({}) }), 100))
     );
 
@@ -127,7 +124,7 @@ describe('Weather Component', () => {
   });
 
   test('displays error message', async () => {
-    (fetch as vi.Mock).mockResolvedValueOnce(mockErrorResponse);
+    (fetch as Mock).mockResolvedValueOnce(mockErrorResponse);
 
     render(<Weather />);
     
@@ -137,7 +134,7 @@ describe('Weather Component', () => {
   });
 
   test('displays weather data successfully', async () => {
-    (fetch as vi.Mock).mockResolvedValueOnce({
+    (fetch as Mock).mockResolvedValueOnce({
       ok: true,
       json: async () => mockSuccessResponse
     });
