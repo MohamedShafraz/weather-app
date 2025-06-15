@@ -92,7 +92,7 @@ export default function Weather() {
       {isLoading && (
         <div className="weather-container">
           <div className="card current-weather">
-            <div className="spinner" />
+            <div data-testid="loading-spinner" className="spinner" />
           </div>
         </div>
       )}
@@ -108,7 +108,7 @@ export default function Weather() {
           <div className="card current-weather">
             <div className="location">
               <h2>
-                {location.name},{location.country}
+                {location?.name || 'N/A'},{location?.country || 'N/A'}
               </h2>
               <p className="date"></p>
             </div>
@@ -117,37 +117,37 @@ export default function Weather() {
               <div>
                 <img
                   className="weather-icon"
-                  src={weatherDetails.condition.icon}
+                  src={weatherDetails?.condition?.icon}
                   alt="Weather icon"
                 />
-                <p id="weather-description">{weatherDetails.condition.text}</p>
+                <p id="weather-description"> {weatherDetails?.condition?.text || 'Loading...'}</p>
               </div>
-              <div className="temperature">{weatherDetails.temp_c}°C</div>
+              <div className="temperature">{weatherDetails?.temp_c || '0'}°C</div>
             </div>
 
             <div className="weather-details">
               <div className="detail-card">
                 <FontAwesomeIcon icon={faTint} className="humidity"/>
                 <h4>Humidity</h4>
-                <p className="detail-value">{weatherDetails.humidity}%</p>
+                <p className="detail-value">{weatherDetails?.humidity || '0'}%</p>
               </div>
 
               <div className="detail-card">
                 <FontAwesomeIcon icon={faWind} className="wind-speed"/>
                 <h4>Wind Speed</h4>
-                <p className="detail-value">{weatherDetails.wind_kph}km/h</p>
+                <p className="detail-value">{weatherDetails?.wind_kph || '0'}km/h</p>
               </div>
 
               <div className="detail-card">
                 <FontAwesomeIcon icon={faSun} className="uv"/>
                 <h4>UV Index</h4>
-                <p className="detail-value">{weatherDetails.uv}</p>
+                <p className="detail-value"> {weatherDetails?.uv || '0'}</p>
               </div>
 
               <div className="detail-card">
                 <FontAwesomeIcon icon={faCompressAlt} className="pressure"/>
                 <h4>Pressure</h4>
-                <p className="detail-value">{weatherDetails.pressure_mb} mb</p>
+                <p className="detail-value"> {weatherDetails?.pressure_mb || '0'} mb</p>
               </div>
             </div>
           </div>
